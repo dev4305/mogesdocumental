@@ -1,12 +1,14 @@
 package com.tcci.gt.mogesdoc.apibackend.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,17 @@ public class TipoPrefijoController {
     @GetMapping("/")
     public List<TipoPrefijo> retrieveAllTipoPrefijo(){
         return tipoPrefijoRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TipoPrefijo> retrieveTipoPrefijo(@PathVariable("id")int id){
+        Optional<TipoPrefijo> tipoPrefijoData = tipoPrefijoRepository.findById(id);
+
+        if(tipoPrefijoData.isPresent()){
+            return new ResponseEntity<>(tipoPrefijoData.get(), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @Transactional
