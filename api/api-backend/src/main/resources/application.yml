@@ -1,0 +1,25 @@
+server:
+  address: 0.0.0.0
+  port: 7070
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1522/ORCLPDB1
+    username: mogesdoc
+    password: desarrollo
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy:  org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+
+springdoc:
+  show-actuator: true
+  swagger-ui:
+    enabled: true
+    path: /mogesdoc/api-user-doc.html
